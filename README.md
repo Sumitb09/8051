@@ -1,66 +1,98 @@
 # 8051 Microcontroller Programs and Tutorials
 
-Welcome to my 8051 microcontroller repository! 🚀 This collection contains programs developed during the **Embedded System Design Lab (ECL-322)**, along with additional projects created for hands-on learning and exploration. The code covers fundamental concepts and practical implementations for 8051 microcontrollers, serving as a tutorial-style resource for beginners and enthusiasts alike.
+Welcome to my 8051 microcontroller repository! This collection contains various programs and projects developed during the **Embedded System Design Lab (ECL-322)**, along with additional ones for hands-on learning. The code covers fundamental concepts and practical implementations in both Assembly and Embedded C, offering a valuable resource for exploring 8051 microcontroller programming.
 
 ---
 
 ## 🛠️ **Tools and Software Used**
-- **Keil μVision**: For writing and simulating code.
-- **Proteus (ACT89C51)**: For circuit simulation.
-- **Flash Magic**: For burning the hex file onto the 8051 microcontroller.
+- **Keil μVision:** For writing, simulating, and debugging code.
+- **Proteus:** For circuit simulation and hardware validation.
+- **Flash Magic:** For burning hex files onto the 8051 microcontroller.
 
 ---
 
 ## 📂 **Repository Structure**
 
-### **1. Lab Tasks (Embedded System Design Lab)**
-These tasks were completed as part of the ECL-322 course. They demonstrate basic interfacing and control concepts essential for embedded system development.
+### **1. Lab Tasks (ECL-322)**
+These tasks cover essential concepts in embedded system development, completed as part of the **Embedded System Design Lab (ECL-322)**.
 
 #### `01_lab_tasks/`
-- **exp1-6.pdf**: Covers experiments 1 to 6.
-- **exp7-9.pdf**: Covers experiments 7 to 9.
-- **README.md**: Documentation for the lab tasks.
+- **exp1-6.pdf:** Documentation for experiments 1 to 6.
+- **exp7-9.pdf:** Documentation for experiments 7 to 9.
 
-### **2. Additional Learning Projects**
-These projects were created to explore more functionalities and gain deeper insights into the 8051 microcontroller.
+---
+
+### **2. Additional Projects**
+These projects extend beyond basic lab tasks, focusing on real-world applications and practical learning.
 
 #### **Directories:**
-- **adc/**: Analog-to-Digital Converter interfacing.
-- **blink_led/**: Basic LED blinking program.
-- **counter/**: Implementing counters using 8051.
-- **hc05/**: Bluetooth communication using HC-05.
-- **interrupts/**: Handling interrupts in 8051.
-- **lcd_interfacing/**: Interfacing a 16x2 LCD display.
-- **pwm/**: Pulse Width Modulation (PWM) implementation.
-- **serial/**: Serial communication.
-- **seven_segment_display/**: Displaying numbers on a 7-segment display.
-- **simple_actuators/**: Controlling basic actuators.
-- **stepper_motor/**: Stepper motor control.
-- **timer/**: Timer programming in 8051.
+
+- ### **adc/**
+  - **Description:** Demonstrates Analog-to-Digital Conversion (ADC).
+  - **Includes:** Assembly and Embedded C code, Proteus simulation files.
+
+- ### **blink_led/**
+  - **Description:** Basic LED blinking program.
+  - **Includes:** Code in Assembly and Embedded C.
+
+- ### **counter/**
+  - **Description:** Implements a counter (00 to 99) displayed on an LCD.
+  - **Includes:** Counter code in Assembly and Embedded C.
+
+- ### **hc05/**
+  - **Description:** Bluetooth communication using the HC-05 module.
+  - **Includes:** Example code for interfacing and communication.
+
+- ### **interrupts/**
+  - **Description:** Demonstrates handling interrupts in 8051.
+  - **Includes:** Examples for edge-triggered and level-triggered interrupts.
+
+- ### **lcd_interfacing/**
+  - **Description:** Interfacing a 16x2 LCD with 8051.
+  - **Includes:** Code in both Assembly and Embedded C.
+
+- ### **pwm/**
+  - **Description:** Pulse Width Modulation (PWM) implementation.
+  - **Includes:** Source code, startup file, and simulation files.
+
+- ### **serial/**
+  - **Description:** Serial communication (UART) implementation.
+  - **Includes:** Code for transmitting and receiving data.
+
+- ### **seven_segment_display/**
+  - **Description:** Displays numbers on a 7-segment display.
+  - **Includes:** Code for interfacing 7-segment displays.
+
+- ### **simple_actuators/**
+  - **Description:** Control simple actuators like buzzers, motors, and relays.
+  - **Includes:** Separate subdirectories for each actuator.
+
+- ### **stepper_motor/**
+  - **Description:** Stepper motor control with different driving techniques.
+  - **Includes:** Full-step, half-step, and wave-step control code.
 
 ---
 
 ## 📘 **Getting Started**
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/Jjateen/8051.git
-   cd 8051
-   ```
 
-2. **Open the Projects in Keil μVision:**
-   - Import the `.c` files and build the project to generate the hex file.
+### **Clone the Repository:**
+```bash
+git clone https://github.com/Jjateen/8051.git
+cd 8051
+```
 
-3. **Simulate Using Proteus:**
-   - Use the hex file generated from Keil μVision to simulate the circuit with the ACT89C51 microcontroller.
+### **Open Projects in Keil μVision:**
+1. Import the `.c` or `.asm` files into Keil μVision.
+2. Compile and build the project to generate the hex file.
 
-4. **Burn the Hex File:**
-   - Use Flash Magic to upload the hex file onto your 8051 microcontroller.
+### **Simulate Using Proteus:**
+1. Load the `.DSN` file into Proteus.
+2. Link the generated hex file from Keil to the 8051 microcontroller component.
 
----
-
-## 🌟 **Support My Work!**
-If you find this repository helpful, please consider leaving a ⭐ star on [GitHub](https://github.com/Jjateen/8051) — it encourages me to create more content and share my learning journey with the community.
+### **Upload to Hardware:**
+Use Flash Magic to burn the hex file onto your 8051 microcontroller.
 
 ---
 
+If you find this repo helpful, please give it a ⭐ on GitHub — it motivates me to create more!
 Happy Coding! 😊
