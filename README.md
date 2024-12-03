@@ -94,5 +94,4 @@ Use Flash Magic to burn the hex file onto your 8051 microcontroller.
 
 ---
 
-If you find this repo helpful, please give it a ⭐ on GitHub — it motivates me to create more!
-Happy Coding! 😊
+If you find this repo helpful, do leave it with a ⭐.
