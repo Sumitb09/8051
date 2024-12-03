@@ -1,0 +1,94 @@
+A51 MACRO ASSEMBLER  ADC                                                                  10/08/2019 08:57:57 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\adc.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE adc.asm SET(SMALL) DEBUG PRINT(.\Listings\adc.lst) OBJECT(.\Objects\adc
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1                                                                                       
+  00B0                 2     ADDR_A  EQU             P3.0
+  00B1                 3     ADDR_B  EQU             P3.1
+  00B2                 4     ADDR_C  EQU             P3.2
+  00B3                 5     ALE             EQU             P3.3    
+  00B4                 6     START   EQU             P3.4
+  00B5                 7     OE              EQU             P3.5
+  00B6                 8     EOC             EQU             P3.6
+  00A0                 9     ADC_DATA        EQU             P2
+  0090                10     LED_OUT EQU                     P1
+                      11     
+0000                  12                     ORG 00H
+0000 020030           13                     LJMP MAIN
+                      14     
+000B                  15                     ORG 000BH
+000B B2B7             16                     CPL P3.7
+000D C28D             17                     CLR TF0
+000F 32               18                     RETI
+                      19                     
+0030                  20                     ORG 0030H               
+0030 758902           21     MAIN:   MOV TMOD, #02H  ; timer 0 auto reload mode 8 bit timer
+0033 758CFB           22                     mov TH0, #0FBH  ; auto reload value
+0036 75A882           23                     MOV IE, #82H    ; enable timer0 overflow interrupt
+0039 D28C             24                     SETB TR0        ; start timer 0
+003B 75A0FF           25                     MOV P2,#0FFH    ; Port 2 as input port
+003E 759000           26                     mov P1,#00H     ; Port 1 as output port
+0041 75B040           27                     MOV P3,#40H         ; Port 3 as output port except P3.6 
+                      28                     
+0044 D2B0             29                     SETB ADDR_A             ; Select IN1 as input source
+0046 C2B1             30                     CLR ADDR_B
+0048 C2B2             31                     CLR ADDR_C
+                      32     
+004A                  33     BACK:   
+004A D2B3             34                     SETB ALE                ; latch address trigger
+004C D2B4             35                     SETB START      ; start conversion trigger
+004E C2B3             36                     CLR ALE                 ; latch address stop
+0050 C2B4             37                     CLR START       ; start conversion stop
+                      38                     
+                      39             
+0052 20B6FD           40     HERE:   JB EOC,HERE
+0055 30B6FD           41     HERE1:  JNB EOC, HERE1
+                      42     
+0058 D2B5             43                     SETB OE                 ; Set the output enable
+005A 85A090           44                     MOV LED_OUT, ADC_DATA   ; Get digital data output ion led
+005D C2B5             45                     CLR OE          ; clear the output enable
+005F 80E9             46                     SJMP BACK               ; take another reading.
+                      47     
+                      48      
+*** WARNING #A41 IN 48 (adc.asm, LINE 48): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  ADC                                                                  10/08/2019 08:57:57 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ADC_DATA . . . . .  D ADDR   00A0H   A   
+ADDR_A . . . . . .  B ADDR   00B0H.0 A   
+ADDR_B . . . . . .  B ADDR   00B0H.1 A   
+ADDR_C . . . . . .  B ADDR   00B0H.2 A   
+ALE. . . . . . . .  B ADDR   00B0H.3 A   
+BACK . . . . . . .  C ADDR   004AH   A   
+EOC. . . . . . . .  B ADDR   00B0H.6 A   
+HERE . . . . . . .  C ADDR   0052H   A   
+HERE1. . . . . . .  C ADDR   0055H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+LED_OUT. . . . . .  D ADDR   0090H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+OE . . . . . . . .  B ADDR   00B0H.5 A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+START. . . . . . .  B ADDR   00B0H.4 A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

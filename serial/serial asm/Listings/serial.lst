@@ -1,0 +1,131 @@
+A51 MACRO ASSEMBLER  SERIAL                                                               11/27/2017 00:41:32 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\serial.obj
+ASSEMBLER INVOKED BY: C:\Keil_8051\C51\BIN\A51.EXE serial.asm SET(SMALL) DEBUG PRINT(.\Listings\serial.lst) OBJECT(.\Obj
+                      ects\serial.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+
+                       2             
+
+0000 758920            3     MOV TMOD,#20h         ; timer1 mode2
+
+                       4     
+
+0003 759850            5     MOV SCON,#50h           ; mode1 ren
+
+                       6     
+
+0006 758DFD            7     MOV TH1,#0FDH             ;9600 baud rate
+
+                       8     
+
+0009 D28E              9     SETB TR1
+
+                      10     
+
+                      11     
+
+000B 75994C           12     AGAIN:MOV SBUF,#'L'
+
+000E 3099FD           13     HERE1:JNB TI, HERE1
+
+0011 C299             14     CLR TI
+
+0013 759941           15     MOV SBUF,#'A'
+
+0016 3099FD           16     HERE2:JNB TI, HERE2
+
+0019 C299             17     CLR TI
+
+001B 759942           18     MOV SBUF,#'B'
+
+001E 3099FD           19     HERE3:JNB TI, HERE3
+
+0021 C299             20     CLR TI
+
+                      21     
+
+                      22     
+
+0023 3098FD           23     HERE4:JNB RI, HERE4
+
+0026 859990           24     MOV P1,SBUF
+
+0029 C298             25     CLR RI
+
+002B 3098FD           26     HERE5:JNB RI, HERE5
+
+002E 859990           27     MOV P1,SBUF
+
+0031 C298             28     CLR RI
+
+0033 80D6             29     SJMP AGAIN
+
+                      30     END                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                          
+
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                                          
+
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+A51 MACRO ASSEMBLER  SERIAL                                                               11/27/2017 00:41:32 PAGE     2
+
+                                                                                                                        
+                                                                                                                                          
+
+A51 MACRO ASSEMBLER  SERIAL                                                               11/27/2017 00:41:32 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   000BH   A   
+HERE1. . . . . . .  C ADDR   000EH   A   
+HERE2. . . . . . .  C ADDR   0016H   A   
+HERE3. . . . . . .  C ADDR   001EH   A   
+HERE4. . . . . . .  C ADDR   0023H   A   
+HERE5. . . . . . .  C ADDR   002BH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,228 @@
+Aim: - Blink LED with time delay of 50ms.
+Assembly Language code: -
+ORG 0000H
+SJMP START
+ORG 0030H
+START: MOV P1, #00H ; Declaring Port-1 as output
+RPT: MOV A, #55H ; Load accumulator with 55H
+ MOV P1, A ; Output to Port 1
+ ACALL Delay ; Call delay
+ CPL A ; Complement the accumulator
+ MOV P1, A ; Output to Port 1
+ ACALL Delay ; Call delay
+ SJMP RPT ; Infinite loop
+ORG 0100H
+Delay: MOV R0, #0FFH ; Adjust R0 for longer delay (e.g., 255)
+loop2: MOV R1, #0FFH ; Adjust R1 for longer delay
+loop1: DJNZ R1, loop1 ; Inner loop
+ DJNZ R0, loop2 ; Outer loop
+ RET
+ END
+
+
+Aim: - Generate a square wave delay of time period 1sec at
+port-1 using Timer-1 in mode-1.
+Assembly program: -
+ORG 0000H
+SJMP MAIN
+ORG 0030H
+MAIN: MOV P1, #00H // set P1 port as low
+MOV TMOD, #10H // load TMOD with #10H for timer-1 in mode-1
+AGAIN: CPL P1.0 // compliment all bits of port-1
+CPL P1.1
+CPL P1.2
+CPL P1.3
+CPL P1.4
+CPL P1.5
+CPL P1.6
+CPL P1.7
+MOV R0, #14H // load register R0 with #14H(20 in decimal)
+RPT: MOV TH1, #3CH // load TH1 with 3CH
+MOV TL1, #0B0H // load TL1 with B0H
+SETB TR1 // start timer-1
+CHECK: JNB TF1, CHECK // check till TF flag becomes high
+CLR TR1 // clear timer-1
+CLR TF1 // clear TF flag
+DJNZ R0, RPT // repeat till R0 becomes zero
+SJMP AGAIN // repeat again
+END
+
+Aim: - Generate square wave with 50% duty cycle with
+frequency of 1khz on port-1 using timer-0 in mode-2.
+Assembly program: -
+ORG 0000H
+SJMP START
+ORG 0030H
+START: MOV P1, #00H // make port-1 low
+MOV TMOD, #02H // load TMOD with #02H for timer-0 in mode-2
+MOV TH0, #00H // load TH0 with #00H
+AGAIN: CPL P1.0 // compliment all bits of port-1
+CPL P1.1
+CPL P1.2
+CPL P1.3
+CPL P1.4
+CPL P1.5
+CPL P1.6
+CPL P1.7
+MOV R0, #2 // load register R0 with 2
+RPT: SETB TR0 // start timer-0
+CHECK: JNB TF0, CHECK // check TF flag till it becomes high
+CLR TR0 // clear timer-0
+CLR TF0 // clear TF flag
+DJNZ R0, RPT // repeat till R0 becomes zero
+SJMP AGAIN
+END
+
+
+Aim: - Generate rectangular wave with high time=10ms and
+low time=20ms.
+Assembly Program: -
+ORG 0000H
+LJMP START
+ORG 0300H
+START: MOV P1, #00H //set port-1 as low
+MOV TMOD, #11H // load TMOD with #11H for using both the timers in
+mode-1
+RPT: MOV P1, #0FFH // set the port-1 as high
+ACALL DELAY1 // call delay for high pulse of 10ms
+MOV P1, #00H // set port-1 as low
+ACALL DELAY2 // call delay for low pulse of 20ms
+SJMP rpt // repeat
+ORG 0030H
+DELAY1: MOV TH0, #0D8H
+MOV TL0, #0F0H
+SETB TR0
+CHECK1: JNB TF0, CHECK1
+CLR TR0
+CLR TF0
+RET
+ORG 00A0H
+DELAY2: MOV TH1, #0B1H
+MOV TL1, #0E0H
+SETB TR1
+CHECK2: JNB TF1, CHECK2
+CLR TR1
+CLR TF1
+RET
+END
+
+
+Aim: - Generate square wave with initial time period of 40ms
+then 10ms.
+Assembly Program: -
+ORG 0000H
+LJMP START
+ORG 0100H
+START: MOV P1, #00H // set port-1 as low
+MOV TMOD, #11H // Load TMOD for timer-1&2 in mode 1
+ACALL DELAY1 // Call delay for 20ms low pulse
+MOV P1, #0FFH // set port-1 as high
+ACALL DELAY1 // Call delay for 20ms high pulse
+RPT: MOV P1, #00H // set port-1 as low
+ACALL DELAY2 // Call delay for 5ms high pulse
+MOV P1, #0FFH // set port-1 as high
+ACALL DELAY2 // Call delay for 5ms low pulse
+SJMP RPT
+ORG 0030H
+DELAY1: MOV TH0, #63H
+MOV TL0, #0C0H
+SETB TR0
+CHECK1: JNB TF0, CHECK1
+CLR TR0
+CLR TF0
+RET
+ORG 00A0H
+DELAY2: MOV TH1, #0D8H
+MOV TL1, #0F0H
+SETB TR1
+CHECK2: JNB TF1, CHECK2
+CLR TR1
+CLR TF1
+RET
+END
+
+Aim: - Assembly Program for Servo-motor.
+Program: -
+ORG 0000H
+LJMP START
+ORG 0100H
+START: MOV P1, #00H
+MOV TMOD, #11H // Load TMOD for timer-1&2 in mode-1
+RPT: ACALL ANG0 // Call delay for 0 degree (1ms high and 19ms low)
+ACALL ANG90 // Call delay for 90 degrees (1,5ms high and 18.5ms
+low)
+ACALL ANG180 // Call delay for 180 degrees (2ms high and 18ms low)
+SJMP RPT
+ORG 0200H
+ANG0: MOV P1, #0FFH
+MOV TH0, #0FCH
+MOV TL0, #18H
+SETB TR0
+CHECK1: JNB TF0, CHECK1
+CLR TR0
+CLR TF0
+MOV P1, #00H
+MOV TH1, #0B5H
+MOV TL1, #0C8H
+SETB TR1
+CHECK2: JNB TF1, CHECK2
+CLR TR1
+CLR TF1
+RET
+ORG 0300H
+ANG90: MOV P1, #0FFH
+MOV TH0, #0FAH
+MOV TL0, #24H
+SETB TR0
+CHECK3: JNB TF0, CHECK3
+CLR TR0
+CLR TF0
+MOV P1, #00H
+MOV TH1, #0B7H
+MOV TL1, #0BCH
+SETB TR1
+CHECK4: JNB TF1, CHECK4
+CLR TR1
+CLR TF1
+RET
+ORG 0400H
+ANG180: MOV P1, #0FFH
+MOV TH0, #0F8H
+MOV TL0, #30H
+SETB TR0
+CHECK5: JNB TF0, CHECK5
+CLR TR0
+CLR TF0
+MOV P1, #00H
+MOV TH1, #0B9H
+MOV TL1, #0B0H
+SETB TR1
+CHECK6: JNB TF1, CHECK6
+CLR TR1
+CLR TF1
+RET
+END
+
+
+Aim: - Assembly Program for stopwatch.
+Program: -
+ORG 0000H
+MOV P1, #00H
+MAIN:JB P3.0, START
+ JB P3.1, STOP
+ JB P3.2, RESET
+ SJMP MAIN
+START:ACALL DELAY_1_SEC
+ INC P1
+ SJMP MAIN
+STOP:SJMP MAIN
+RESET:MOV P1, #00H
+ SJMP MAIN
+DELAY_1_SEC:MOV R1, #20
+ MOV R2, #250
+ MOV R3, #250
+DELAY_LOOP:DJNZ R3, DELAY_LOOP
+ DJNZ R2, DELAY_LOOP
+ DJNZ R1, DELAY_LOOP
+ RET
+END

@@ -1,0 +1,50 @@
+A51 MACRO ASSEMBLER  UNIPOLAR                                                             10/02/2019 19:19:37 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\unipolar.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE unipolar.asm SET(SMALL) DEBUG PRINT(.\Listings\unipolar.lst) OBJECT(.\O
+                      bjects\unipolar.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+                       2                     
+0000 75A008            3     MAIN:   MOV P2, #08H
+0003 1116              4                     ACALL DELAY
+0005 75A004            5             MOV P2, #04H
+0008 1116              6                     ACALL DELAY
+000A 75A002            7             MOV P2, #02H
+000D 1116              8                     ACALL DELAY
+000F 75A001            9             MOV P2, #01H
+0012 1116             10                     ACALL DELAY
+0014 80EA             11                     SJMP MAIN
+                      12                                     
+0016 7807             13     DELAY:  MOV R0,#07
+0018 79FF             14                     HERE3:MOV R1,#255
+001A 7AFF             15                     HERE2:MOV R2,#255
+001C DAFE             16                     HERE1:DJNZ R2,HERE1
+001E D9FA             17                     DJNZ R1,HERE2
+0020 D8F6             18                     DJNZ R0,HERE3
+0022 22               19                     RET                     
+                      20                     END
+A51 MACRO ASSEMBLER  UNIPOLAR                                                             10/02/2019 19:19:37 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0016H   A   
+HERE1. . . . . . .  C ADDR   001CH   A   
+HERE2. . . . . . .  C ADDR   001AH   A   
+HERE3. . . . . . .  C ADDR   0018H   A   
+MAIN . . . . . . .  C ADDR   0000H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

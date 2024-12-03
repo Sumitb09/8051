@@ -1,0 +1,59 @@
+A51 MACRO ASSEMBLER  UNIPOLAR                                                             10/02/2019 19:54:16 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\unipolar.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE unipolar.asm SET(SMALL) DEBUG PRINT(.\Listings\unipolar.lst) OBJECT(.\O
+                      bjects\unipolar.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+                       2             
+0000 75A008            3     MAIN:   MOV P2, #08H
+0003 112A              4                     ACALL DELAY
+0005 75A00C            5             MOV P2, #0CH
+0008 112A              6                     ACALL DELAY
+000A 75A004            7             MOV P2, #04H
+000D 112A              8                     ACALL DELAY
+000F 75A006            9             MOV P2, #06H
+0012 112A             10                     ACALL DELAY
+0014 75A002           11                     MOV P2, #02H
+0017 112A             12                     ACALL DELAY
+0019 75A003           13             MOV P2, #03H
+001C 112A             14                     ACALL DELAY
+001E 75A001           15             MOV P2, #01H
+0021 112A             16                     ACALL DELAY
+0023 75A009           17             MOV P2, #09H
+0026 112A             18                     ACALL DELAY
+                      19     
+0028 80D6             20                     SJMP MAIN
+                      21                                     
+002A 7807             22     DELAY:  MOV R0,#07
+002C 79FF             23                     HERE3:MOV R1,#255
+002E 7AFF             24                     HERE2:MOV R2,#255
+0030 DAFE             25                     HERE1:DJNZ R2,HERE1
+0032 D9FA             26                     DJNZ R1,HERE2
+0034 D8F6             27                     DJNZ R0,HERE3
+0036 22               28                     RET                     
+                      29                     END
+A51 MACRO ASSEMBLER  UNIPOLAR                                                             10/02/2019 19:54:16 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   002AH   A   
+HERE1. . . . . . .  C ADDR   0030H   A   
+HERE2. . . . . . .  C ADDR   002EH   A   
+HERE3. . . . . . .  C ADDR   002CH   A   
+MAIN . . . . . . .  C ADDR   0000H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
