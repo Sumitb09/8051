@@ -126,7 +126,11 @@ Yes. Port 0 is an open-drain port and requires external pull-up resistors (10k o
 ---
 
 ### **Difference between a Timer and a Counter**
-![Timer vs Counter](https://udemy-images.s3.amazonaws.com/redactor/raw/2019-01-05_12-17-36-065d4a4a7781ae4d3c4620477f6976fb.PNG)
+| **__Timer__**                                                              | **__Counter__**                                                         |
+|---------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| The register is incremented for every machine cycle.                      | The register is incremented considering 1 to 0 transition at its corresponding to an external input pin (T0, T1). |
+| Maximum count rate is 1/12 of the oscillator frequency.                   | Maximum count rate is 1/24 of the oscillator frequency.                |
+| A timer uses the frequency of the internal clock, and generates delay.    | A counter uses an external signal to count pulses.                     |
 
 ---
 
