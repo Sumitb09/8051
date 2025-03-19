@@ -77,7 +77,7 @@ These projects extend beyond basic lab tasks, focusing on real-world application
 
 ### **Clone the Repository:**
 ```bash
-git clone https://github.com/Jjateen/8051.git
+git clone https://github.com/Sumitb09/8051.git
 cd 8051
 ```
 
